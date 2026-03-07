@@ -220,8 +220,11 @@ def run_prediction():
         print(f"Peak KPI:        {peak_kpi:.2f} ({peak_plot_name})")
         print("-" * 30)
         
-        # Send WhatsApp Notification
-        send_whatsapp_notification(avg_kpi, len(predictions), peak_kpi, peak_plot_name, alert_plots)
+        # Send WhatsApp Notification ONLY if there are alerts
+        if alert_plots:
+            send_whatsapp_notification(avg_kpi, len(predictions), peak_kpi, peak_plot_name, alert_plots)
+        else:
+            print("WhatsApp Notification skipped: All plots are within normal range.")
 
 
 if __name__ == "__main__":
